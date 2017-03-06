@@ -1,11 +1,13 @@
 from matrix_client.client import MatrixClient
+import sys
 import json
 from adapt.intent import IntentBuilder
 from adapt.engine import IntentDeterminationEngine
 
+password = input('Password? ')
+
 client = MatrixClient("https://matrix.org")
 engine = IntentDeterminationEngine()
-
 
 
 def on_message(room, event):
@@ -51,7 +53,7 @@ engine.register_intent_parser(weather_intent)
 engine.register_intent_parser(hide_intent)
 
 # Existing user
-token = client.login_with_password(username="@apebot:matrix.org", password='"VqllVRn_kq"ckZ6QG/S')
+token = client.login_with_password(username="@apebot:matrix.org", password=password)
 
 room = client.join_room("#apebot:matrix.org")
 room.add_listener(on_message)
